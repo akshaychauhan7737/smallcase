@@ -1,0 +1,43 @@
+{
+    "server": {
+        "index": {
+            "port": 8090
+        }
+    },
+    "logging": {
+        "label": "smallcase_portfolio",
+        "consoleLevel": "debug",
+        "fileLevel": "debug"
+    },
+    "database": {
+        "mysqlMaster": {
+            "host": "localhost",
+            "port": "3306",
+            "user": "root",
+            "password": "root",
+            "database": "smallcase_portfolio",
+            "connectionLimit": 10
+        }
+    },
+    "email": {
+        "sendFrom"  : "admin@smallcase.com",
+        "ccEmails"  : []
+    },
+    "redis": {
+        "host"              : "localhost",
+        "auth_pass"         : "",
+        "port"              : "6379",
+        "prefix"            : "",
+        "keyPrefix"         : "",
+        "switch"            : true,
+        "minConnections"    : 0,
+        "maxConnections"    : 30,
+        "poolSize"          : 100
+    },
+    "redisKeys" : {
+        "teacherSlotList": {"prefix":"teacherSlotList","ttl":3000}
+    },
+    "domain" : {
+        "apiServer"     : "http://localhost:8090/"
+    }
+}
