@@ -1,24 +1,28 @@
-/**
- * Authentication Controller
- * 
- * @author Prerita
- */
 const constants 	= require(__basePath + '/app/config/constants');
 const response 		= require(constants.path.app + 'util/response');
-const authService   = require(constants.path.app + 'module/service/authService');
+const portfolioService   = require(constants.path.app + 'module/service/portfolioService');
 const { logger }    = require(constants.path.app + 'core/logger');
 const underscore    = require('underscore');
 
-exports.userLogin = async function (req, res, next) {
+exports.listPortfolio = async function (req, res) {
     try{
-        const results = await authService.userLogin(req.body);
-        if(typeof results.authToken !== 'undefined'){
-            return res.status(200).json(response.build('SUCCESS',results));
-        } else {
-            return res.status(401).json(response.build('FAILURE',results));
-        }
+        const { userId } = req.params;
+        const results = await portfolioService.getUserPortfolio(userId);
+        return res.status(200).json(response.build('SUCCESS',results));
     } catch(error){
-        logger.error(error);
+        console.log(error)
+        return res.status(500).json(response.build('SERVER_ERROR', "Please try again later"));
+    }
+}
+
+exports.upsertPortfolio = async function (req, res) {
+    try{
+        const { userId,tradingSymbol }  = req.params;
+        const { qty,type }              = req.body;
+        const results = await portfolioService.upsertPortfolio(userId,tradingSymbol,qty,type);
+        return res.status(200).json(response.build('SUCCESS',results));
+    } catch(error){
+        console.log(error)
         return res.status(500).json(response.build('SERVER_ERROR', "Please try again later"));
     }
 }

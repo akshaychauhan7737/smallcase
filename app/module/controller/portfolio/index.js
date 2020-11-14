@@ -1,25 +1,21 @@
 const constants   = require(__basePath + 'app/config/constants');
 const router      = require('express').Router({
-    caseSensitive: true,
-    strict       : true
+    caseSensitive   : true,
+    strict          : true
 });
-const controller    = require(constants.path.module + 'portfolio/authController');
+const controller    = require(constants.path.module + 'portfolio/portfolioController');
 const validation    = require(constants.path.module + 'validate/portfolioValidator');
 
 router.get(
-    '/list', 
-    validation.userLogin, 
-    controller.userLogin
+    '/list/:userId', 
+    validation.listPortfolio, 
+    controller.listPortfolio
 );
+
 router.post(
-    '/:id', 
-    validation.userLogin, 
-    controller.userLogin
-);
-router.get(
-    '/', 
-    validation.userLogin, 
-    controller.userLogin
+    '/:userId/:tradingSymbol', 
+    validation.upsertPortfolio, 
+    controller.upsertPortfolio
 );
 
 module.exports = {

@@ -6,7 +6,6 @@ const fileUpload    = require('express-fileupload');
 const exception  	= require(constant.path.app + 'core/exception');
 const {logger}   	= require(constant.path.app + 'core/logger');
 const config     	= require(constant.path.app + 'core/configuration');
-const worker     	= require(constant.path.app + 'worker');
 
 
 app.use((req, res, next) => {
